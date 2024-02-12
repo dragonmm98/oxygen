@@ -1,6 +1,8 @@
 const express = require("express");
 const router_bssr = express.Router();
 const dealerController = require("./controllers/dealerController")
+const productController = require("./controllers/productController")
+const uploader_products = require ("./utils/upload-multer")("products")
 
 /**********************************
 *--------------BSSR EJS-----------*
