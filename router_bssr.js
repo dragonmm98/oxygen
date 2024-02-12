@@ -19,6 +19,8 @@ router_bssr
 
 router_bssr.get ("/logout", dealerController.logout);
 
+router_bssr.get("/products/menu", dealerController.getMyDealerProducts)
+
 
 
 module.exports= router_bssr;
