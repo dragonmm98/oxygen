@@ -151,3 +151,52 @@ dealerController.getChosenDealer = async (req,res) => {
                 message: "only authenticated members with Dealer type",
                });
         };
+
+        dealerController.checkme = (req,res) => {
+            if ( req.session?.member) {
+                res.json ({state: "succeed", data: req.session.member})
+            } else {
+                res.json ({state : "fail", message : "Your are not authenticated"});
+            }
+        };
+
+        dealerController.validateAdmin=(req,res,next) => {
+            if(req.session?.member?.mb_type==="ADMIN") {
+                req.member =req.session.member;
+                next();
+            } else {
+                const html = `<script>alert("Not Permitted!!! The Page is only for Admins"); window.location.replace("/dealers"); </script>`;
+                res.end(html);
+            }
+        };
+
+        dealerController.getAllDealers = async (req,res) => {
+            try {
+                console.log ("GET connect/getAllDealers");
+                 const dealers = new Dealers();
+                 const dealers_data = await dealers.getDealersData();
+        
+                  res.render("all-dealers", {dealers_data: dealers_data});
+        
+            } catch (err) {
+                console.log (`ERROR, connect/logout, ${err.message}`);
+                res.json({ state:"fail", message: err.message});
+            }
+        }
+        
+        
+        // Admin log
+        
+        dealerController.getAllDealersUpdate = async (req, res) => {
+          try {
+          
+            console.log ("POST connect/getAllDealersUpdate");
+            const dealers = new Dealers();
+            const result = await dealers.getAllDealersUpdateData(req.body);
+            await res.json({state: "success", data: result});
+          
+        } catch (err) {
+            console.log (`ERROR, cont/getAllDealersUpdate, ${err.message}`);
+             res.json({ state:"fail", message: err.message});
+          }
+        }
