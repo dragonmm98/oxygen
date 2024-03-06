@@ -1,6 +1,7 @@
 const assert = require("assert");
 const Definer = require("../lib/mistake");
 const Member = require ("../models/Member");
+const Product = require ("../models/Product")
 
 let dealerController = module.exports;
 
@@ -63,11 +64,11 @@ dealerController.getChosenDealer = async (req,res) => {
          dealerController.signupProcess = async (req,res) => {
             try{
                 console.log ("POST:connect/signupMyDealersPage");
-                // assert( req.file,Definer.general_err3);
+                assert( req.file,Definer.general_err3);
                 
                 let data  = req.body;
                 data.mb_type = "DEALER";
-                // data.mb_image = req.file.path.replace(/\\/g, "/");
+                data.mb_image = req.file.path.replace(/\\/g, "/");
                 
                 const member = new Member();
                 const new_member = await member.signupData(data);
@@ -131,8 +132,8 @@ dealerController.getChosenDealer = async (req,res) => {
         dealerController.getMyDealerProducts = async (req,res) => {
             try {
                 console.log ("GET: connect/getMyDealerProducts");
-                // const product = new Product();
-                // const data = await product.getAllProductsDataDealer(res.locals.member);   
+                const product = new Product();
+                const data = await product.getAllProductsDataDealer(res.locals.member);  
                 res.render('dealers-menu',{dealer_data:data});
                 
             } catch (err) {

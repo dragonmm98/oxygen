@@ -1,0 +1,88 @@
+<%-  include("includes/header") %>
+
+<link rel="stylesheet" type="text/css" href="/css/home.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+<body>
+
+    <div class="group_name">
+        
+        <ul class="nav">
+            <li class="nav-item" style="cursor:pointer">
+              <a class="nav-link"  href="/dealers/signup">SignUp Page</a>
+            </li>
+            <% if(!member) {%>
+                
+                <li class="nav-item" style="cursor:pointer">
+                    <a class="nav-link"  href="/dealers/login">Login Page</a>
+                  </li>
+                  
+                  <li class="nav-item" style="cursor:pointer">
+                    <a class="nav-link active"  href="/dealers">Home Page</a>
+                  </li>
+                <% } else if (member.mb_type==="ADMIN") {%>
+                    <li class="nav-item" style="cursor:pointer">
+                        <a class="nav-link"  href="/dealers/all-dealers">All Restaurant Page</a>
+                      </li>
+                     <li 
+                     class="nav-item" 
+                     style="cursor:pointer" 
+                     onclick="return confirm('Do you want to logout?')">
+                        <a class="nav-link"  href="/dealers/logout">Logout Page</a>
+                      </li>
+
+
+                    <% } else {%>
+                        <li class="nav-item" style="cursor:pointer">
+                            <a class="nav-link"  href="/dealers/products/menu">Product Menu Page</a>
+                          </li>
+                          
+                          <li 
+                          class="nav-item" 
+                          style="cursor:pointer"
+                          onclick="return confirm('Do you want to logout?')">
+                            <a class="nav-link"  href="/dealers/logout">Logout Page</a>
+                          </li>
+
+                        <% } %>
+          </ul>
+    </div>
+     
+    <main class="main"> 
+        <div class="page-1 ">
+            <div class="header">
+                <div class="nav container">
+                    <div class="logo">
+                        <img src="bubble.png" alt="">
+                        
+                    </div>
+                    <ul>
+            
+
+            <div class="page-1__body container">
+            
+            </div>
+
+         
+            <div class="bubble">
+                <img src="bubble.png" alt="">
+                <img src="bubble.png" alt="">
+                <img src="bubble.png" alt="">
+                <img src="bubble.png" alt="">
+                <img src="bubble.png" alt="">
+                <img src="bubble.png" alt="">
+                <img src="bubble.png" alt="">
+                <img src="bubble.png" alt="">
+                <img src="bubble.png" alt="">
+                <img src="bubble.png" alt="">
+            </div>
+
+        </div>
+    </main>
+    
+</body>
+
+
+<%- include("includes/footer") %>
+
+

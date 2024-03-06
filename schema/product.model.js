@@ -1,5 +1,5 @@
 const mongoose = require ("mongoose");
-const { product_collection_enums, product_status_enums, product_size_enums, product_volume_enums } = require("../lib/config");
+const { product_collection_enums, product_status_enums, product_size_enums, product_volume_enums, product_company_enums } = require("../lib/config");
 
 const Schema = mongoose.Schema;
 
@@ -54,6 +54,7 @@ const productSchema = new mongoose.Schema ({
             message:"{VALUE} is not among permitted enum values",
             
         },
+    },
     product_color: {
       type: String,
       required: true,
@@ -93,7 +94,7 @@ dealers_mb_id:{
 
 
 
-}}, {timestamps:true} );  // createdAt , UpdatedAt
+}, {timestamps:true} );  // createdAt , UpdatedAt
 
 productSchema.index(
     {dealers_mb_id:1, product_name:1, product_size:1, product_year:1, product_collection_enums: 1},
