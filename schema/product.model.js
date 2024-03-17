@@ -1,5 +1,5 @@
 const mongoose = require ("mongoose");
-const { product_collection_enums, product_status_enums, product_size_enums, product_volume_enums, product_company_enums } = require("../lib/config");
+const { product_collection_enums, product_status_enums, product_size_enums, product_volume_enums, product_company_enums, product_fuel_enums } = require("../lib/config");
 
 const Schema = mongoose.Schema;
 
@@ -32,9 +32,18 @@ const productSchema = new mongoose.Schema ({
         required: false,
         default:0,
     },
-    product_left_cnt: {
-        type: Number,
+    product_milaege: {
+        type: String,
         required: true,
+        default:"0km",
+    },
+    product_fuel_type: {
+        type: String,
+        required: true,
+        enum: {
+            values: product_fuel_enums,
+            message:"{VALUE} is not among permitted enum values",
+        }
     },
    product_size: {
     type: String,

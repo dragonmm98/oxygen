@@ -1,5 +1,166 @@
-<%- include ("includes/header") %>
+<%- include("includes/header") %>
+<link rel="stylesheet" type="text/css" href="/css/signup.css">
+
 <body>
-    signup
+    <div class="wrapper">
+     <form
+     onsubmit="return validateSignUpForm()" 
+     class="login-box" 
+     action="/dealers/signup" 
+     method="post" 
+     enctype="multipart/form-data">
+   <div class="input-box">
+       <div class="login_top">
+          <span>Registration</span>
+          <div>Return to Home Page <a href="/dealers" style="color: #6440fb;">Home</a>
+          </div>
+          <p>
+               Do you have existing account?
+               <a href="/dealers/login" style="color:#6440FB;">Login</a>
+          </p>
+       </div>
+         
+       <div class="sign_input_frame">
+          <div class="sign_up_frame">
+              
+               <input 
+               type="text"
+               name="mb_nick"
+               class="mb_nick"
+               placeholder="Input user name"
+               value=""
+               required
+               >
+          </div>   
+          <div class="sign_up_frame">
+              
+               <input 
+               type="text"
+               name="mb_phone"
+               class="mb_phone"
+               placeholder="Phone number"
+               value=""
+               required
+               >
+          </div>   
+       </div>
+       
+       <div class="sign_input_frame">
+          <div class="sign_up_frame">
+               
+               <input 
+               type="password"
+               name="mb_password"
+               class="mb_password"
+               placeholder="Enter your password"
+               value=""
+               required
+               >
+          </div>   
+          <div class="sign_up_frame">
+              
+               <input 
+               type="password"
+               name="mb_confirm_password"
+               class="mb_confirm_password"
+               placeholder="Reenter your password"
+               value=""
+               required
+               >
+          </div>    
+       </div>
+    <div class="login_input_frame">
+       <div class="media_frame">
+        <img class="upload_image_frame" src="/images/cloud upload.jpg" alt="">
+        <div class="upload_cont">
+          <span class="media_text">Picture</span>
+          <div class="filebox bs3-primary preview-image">
+               <input 
+               class="upload_name" 
+               value="Upload Picture" 
+               disabled="disabled"
+               >
+
+               <input 
+               type="file"
+               id="input_file"
+               name="dealers_img"
+               class="upload-hidden form-control-file dealers_img"
+               >
+               </div>
+               <p class="thumbnails">Upload your Profile picture here <br>Picture should be in .jpg, .jpeg,
+                or .png format<br>Upload only original picture it must not include any text  </p>
+
+        </div>
+
+       </div>
+    </div>
+    <button class="login_btn" name="signup" type="submit">Register</button>
+
+     </div>
+
+   </form>  
+</div>
 </body>
-<%- include ("includes/footer") %>
+
+<script>
+       
+       $(function() {
+          let fileTarget= $(".filebox .upload-hidden");
+          let filename ="";
+
+          fileTarget.on("change", function(){
+               if (window.FileReader) {
+                    const uploading_file = $(this)[0].files[0];
+                    const fileType =uploading_file["type"];
+                    const validImageTypes = ["image/jpg","image/jpeg","image/png"];
+                    if (!validImageTypes.includes(fileType)) {
+                         alert ('Please upload only allowed image types')
+                    } else {
+                    if (uploading_file) {
+                         console.log(URL.createObjectURL(uploading_file));
+                         $(".upload_image_frame")
+                         .attr("src", URL.createObjectURL(uploading_file))
+                         .addClass("success"); 
+                    }
+                    // filename =$(this)[0].files[0].name;     
+             }
+           } 
+            $(this).siblings('.upload_name').val(filename);
+          })
+     })
+      
+
+     function validateSignUpForm() {
+          const mb_nick = $(".mb_nick").val();
+          const mb_phone = $(".mb_phone").val();
+          const mb_password = $(".mb_password").val();
+          const mb_confirm_password = $(".mb_confirm_password").val();
+          const dealers_img = $(".dealers_img").get(0).files[0]?? null;
+
+          if (
+               mb_nick ==''|| 
+               mb_password ==''|| 
+               mb_phone==''||
+               mb_confirm_password==''
+               ) {
+           alert("Please fill all boxes")
+           return false;
+          } else if (mb_password !== mb_confirm_password) {
+               alert (`Password confirmation is wrong`);
+               return false;
+           }
+
+          if (!dealers_img) {
+               alert ("Please upload the image!");
+           return false;
+
+          }
+          
+          return true;
+     }
+</script>
+
+
+
+<%- include('includes/footer') %>  

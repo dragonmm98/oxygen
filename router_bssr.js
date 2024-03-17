@@ -3,6 +3,7 @@ const router_bssr = express.Router();
 const dealerController = require("./controllers/dealerController")
 const productController = require("./controllers/productController")
 const uploader_products = require ("./utils/upload-multer")("products")
+const uploader = require ("./utils/upload-multer")("members")
 
 /**********************************
 *--------------BSSR EJS-----------*
@@ -13,7 +14,8 @@ router_bssr.get("/", dealerController.home);
 
 router_bssr
 .get("/signup", dealerController.getSignupMyDealerPage)
-.post("/signup", dealerController.signupProcess);
+.post("/signup", uploader.single("dealers_img"),
+ dealerController.signupProcess);
 
 router_bssr
 .get("/login", dealerController.getLoginMyDealerPage)
