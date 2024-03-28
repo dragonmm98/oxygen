@@ -17,14 +17,14 @@ const productSchema = new mongoose.Schema ({
     product_status :{
         type: String, 
         required: false,
-         default: "PAUSED",
+         default: "RESERVED",
           enum:{
             values: product_status_enums,
             message:"{VALUE} is not among permitted enum values",
         },
     },
     product_price: {
-        type: Number,
+        type: String,
         required: true,
     },
     product_discount: {
@@ -68,21 +68,17 @@ const productSchema = new mongoose.Schema ({
       type: String,
       required: true,
     },
-    product_model: {
-        type: String,
-        required: true,
-      },
    product_year: {
     type:Number,
     required:true,
     },
    product_description:{
     type:String,
-    required:true
+    required:false
    },
    product_images: {
     type:Array,
-    required:true,
+    required:false,
     default:[]
 },
 product_likes: {

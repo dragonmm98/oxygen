@@ -1,15 +1,7 @@
+const { product_company_enums } = require("../lib/config");
+
 $(function(){
     
-    $(".product_collection").on("change",() =>{
-        const selected_value = $(".product_collection").val();
-        if(selected_value === 'drink') {
-            $("#product_volume").show();
-            $("#product_size").hide();
-        } else {
-            $("#product_volume").hide();
-            $("#product_size").show();
-        }
-    })
 
  $(".hiding_btn").on("click",() =>{
     $(".dish_container").slideToggle(500);
@@ -22,7 +14,7 @@ $(function(){
     const product_status = $(`#${id}.new_product_status`).val();
      try{
         const response = await axios.post(
-            `/resto/products/edit/${id}`,
+            `/dealers/products/edit/${id}`,
             {id: id, product_status: product_status});
         const result = response.data;
         console.log("result:", result);
@@ -42,15 +34,15 @@ $(function(){
 });
 
 function validateForm() {
-    const restaurant_mb_id = $(".restaurant_mb_id").val(),
+    const dealers_mb_id = $(".dealers_mb_id").val(),
           product_name = $(".product_name").val(),
           product_price = $(".product_price").val(),
-          product_left_cnt = $(".product_left_cnt").val(),
+          product_left_cnt = $(".product_company").val(),
           product_collection = $(".product_collection").val(),
           product_status = $(".product_status").val(),
           product_description = $(".product_description").val()  
 
-          if(restaurant_mb_id == '' || product_name == '' || product_price == '' || product_left_cnt == '' ||
+          if(dealers_mb_id == '' || product_name == '' || product_price == '' || product_company == '' ||
           product_collection == '' || product_description =='' || product_status == '') {
             alert ("Please fill all the fields");
             return false;

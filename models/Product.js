@@ -77,7 +77,7 @@ class Product {
             
             member._id = shapeIntoMongooseObjectId(member._id);
               const result = await this.productModel.find({
-                dealer_mb_id: member._id,
+                dealers_mb_id: member._id,
             });
             assert.ok(result,Definer.general_err1);
             return result;
@@ -88,7 +88,7 @@ class Product {
 
      async addNewProductData (data,member) {
         try{
-        data.dealer_mb_id = shapeIntoMongooseObjectId(member._id);
+        data.dealers_mb_id = shapeIntoMongooseObjectId(member._id);
         
 
         const new_product = new this.productModel(data);
@@ -109,7 +109,7 @@ class Product {
             mb_id =shapeIntoMongooseObjectId(mb_id);
 
             const result= await this.productModel
-            .findOneAndUpdate({_id: id, dealer_mb_id: mb_id},
+            .findOneAndUpdate({_id: id, dealers_mb_id: mb_id},
                 updated_data,
                 {
                     runValidators:true,
